@@ -1,5 +1,5 @@
 {
-  "name": "@livekit/api-documenter",
+  "name": "@cc-livekit/api-documenter",
   "version": "7.22.21",
   "description": "Read JSON files from api-extractor, generate documentation pages",
   "repository": {
