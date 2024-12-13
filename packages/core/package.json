@@ -1,5 +1,5 @@
 {
-  "name": "@livekit/components-core",
+  "name": "@cc-livekit/components-core",
   "version": "0.11.10",
   "license": "Apache-2.0",
   "author": "LiveKit",
@@ -44,7 +44,7 @@
     "tslib": "^2.6.2"
   },
   "devDependencies": {
-    "@livekit/components-styles": "workspace:*",
+    "@cc-livekit/components-styles": "workspace:*",
     "@livekit/protocol": "^1.23.0",
     "@microsoft/api-extractor": "^7.36.0",
     "@size-limit/file": "^11.0.2",

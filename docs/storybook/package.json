@@ -5,14 +5,14 @@
   "license": "Apache-2.0",
   "main": "index.js",
   "scripts": {
-    "build": "storybook build",
+    "build": "",
     "clean": "rm -rf .turbo && rm -rf node_modules",
     "dev": "storybook dev -p 6006",
     "tsx:check": "tsc --noEmit"
   },
   "dependencies": {
-    "@livekit/components-react": "workspace:*",
-    "@livekit/components-styles": "workspace:*",
+    "@cc-livekit/components-react": "workspace:*",
+    "@cc-livekit/components-styles": "workspace:*",
     "livekit-client": "^2.5.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
