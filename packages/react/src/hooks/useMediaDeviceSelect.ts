@@ -1,4 +1,4 @@
-import { createMediaDeviceObserver, setupDeviceSelector, log } from '@livekit/components-core';
+import { createMediaDeviceObserver, setupDeviceSelector, log } from '@cc-livekit/components-core';
 import type { LocalAudioTrack, LocalVideoTrack, Room } from 'livekit-client';
 import * as React from 'react';
 import { useMaybeRoomContext } from '../context';

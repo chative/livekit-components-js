@@ -1,4 +1,4 @@
-import { getTrackReferenceId, isLocal } from '@livekit/components-core';
+import { getTrackReferenceId, isLocal } from '@cc-livekit/components-core';
 import { Track } from 'livekit-client';
 import * as React from 'react';
 import { useTracks } from '../hooks';
