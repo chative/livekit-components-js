@@ -1,5 +1,5 @@
-import { getTrackReferenceId, isLocal } from '@cc-livekit/components-core';
-import { LocalParticipant, Track } from 'livekit-client';
+import { getTrackReferenceId } from '@cc-livekit/components-core';
+import { Track } from 'livekit-client';
 import * as React from 'react';
 import { useTracks } from '../hooks';
 import { AudioTrack } from './participant/AudioTrack';

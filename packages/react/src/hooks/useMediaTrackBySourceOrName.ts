@@ -1,6 +1,6 @@
 import type { TrackIdentifier } from '@cc-livekit/components-core';
 import { isTrackReference } from '@cc-livekit/components-core';
-import { setupMediaTrack, log, isLocal, getTrackByIdentifier } from '@cc-livekit/components-core';
+import { setupMediaTrack, log, getTrackByIdentifier } from '@cc-livekit/components-core';
 import * as React from 'react';
 import { mergeProps } from '../utils';
 
@@ -52,7 +52,7 @@ export function useMediaTrackBySourceOrName(
       }
       if (
         options.element?.current &&
-        !(isLocal(observerOptions.participant) && track?.kind === 'audio')
+        !(observerOptions.participant.isLocal && track?.kind === 'audio')
       ) {
         track.attach(options.element.current);
       }
