@@ -1,5 +1,4 @@
 import type { Participant, TrackPublication } from 'livekit-client';
-import { LocalParticipant, RemoteParticipant } from 'livekit-client';
 
 import type { PinState } from './types';
 import type { TrackReference } from './track-reference';
