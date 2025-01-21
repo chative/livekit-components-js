@@ -1,6 +1,6 @@
 {
   "name": "@cc-livekit/components-react",
-  "version": "3.0.25",
+  "version": "3.0.26",
   "license": "Apache-2.0",
   "author": "LiveKit",
   "repository": {
@@ -60,7 +60,7 @@
   },
   "peerDependencies": {
     "@livekit/krisp-noise-filter": "^0.2.12",
-    "livekit-client": "2.8.0",
+    "livekit-client": "2.8.1",
     "react": ">=18",
     "react-dom": ">=18",
     "tslib": "^2.6.2"
