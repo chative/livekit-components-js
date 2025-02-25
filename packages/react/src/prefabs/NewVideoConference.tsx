@@ -39,6 +39,7 @@ export interface NewVideoConferenceProps extends React.HTMLAttributes<HTMLDivEle
   onAddMember?: () => void;
   onMemberList?: () => void;
   filterLocalTracks?: boolean;
+  onDeviceError?: (error: { source: Track.Source; error: Error }) => void;
 }
 
 /**
@@ -69,6 +70,7 @@ export function NewVideoConference({
   onMemberList,
   filterLocalTracks,
   controls,
+  onDeviceError,
   ...props
 }: NewVideoConferenceProps) {
   const [widgetState, setWidgetState] = React.useState<WidgetState>({
@@ -258,6 +260,7 @@ export function NewVideoConference({
               onMemberList={onMemberList}
               controls={{ chat: true, settings: !!SettingsComponent, ...controls }}
               onScreenShareClick={onScreenShareClick}
+              onDeviceError={onDeviceError}
             />
           </div>
           <Chat

@@ -77,6 +77,16 @@ export function setupMediaToggle<T extends ToggleSource>(
       pendingSubject.next(true);
       switch (source) {
         case Track.Source.Camera:
+          if (room.metadata) {
+            const metadata = JSON.parse(room.metadata);
+            if (metadata.canPublishVideo === false) {
+              const localTrack = room.localParticipant.getTrackPublication(Track.Source.Camera);
+
+              if (!localParticipant.isCameraEnabled && !localTrack) {
+                throw new Error('RATE_LIMIT');
+              }
+            }
+          }
           await localParticipant.setCameraEnabled(
             forceState ?? !localParticipant.isCameraEnabled,
             captureOptions as VideoCaptureOptions,
@@ -97,7 +107,7 @@ export function setupMediaToggle<T extends ToggleSource>(
           //   publishOptions,
           // );
           console.warn('do nothing, use custom screen share picker.');
-          
+
           return localParticipant.isScreenShareEnabled;
         default:
           throw new TypeError('Tried to toggle unsupported source');
