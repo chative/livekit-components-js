@@ -94,6 +94,16 @@ export function setupMediaToggle<T extends ToggleSource>(
           );
           return localParticipant.isCameraEnabled;
         case Track.Source.Microphone:
+          if (room.metadata) {
+            const metadata = JSON.parse(room.metadata);
+            if (metadata.canPublishAudio === false) {
+              const localTrack = room.localParticipant.getTrackPublication(Track.Source.Microphone);
+
+              if (!localParticipant.isMicrophoneEnabled && !localTrack) {
+                throw new Error('RATE_LIMIT');
+              }
+            }
+          }
           await localParticipant.setMicrophoneEnabled(
             forceState ?? !localParticipant.isMicrophoneEnabled,
             captureOptions as AudioCaptureOptions,
