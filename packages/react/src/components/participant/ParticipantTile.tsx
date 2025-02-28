@@ -139,9 +139,9 @@ export const ParticipantTile: (
       }
     }, [trackReference.source]);
 
-    const shouldShowScaleControl = React.useMemo(() => {
-      return trackReference.source === Track.Source.ScreenShare && isFocus;
-    }, [trackReference.source, isFocus]);
+    // const shouldShowScaleControl = React.useMemo(() => {
+    //   return trackReference.source === Track.Source.ScreenShare && isFocus;
+    // }, [trackReference.source, isFocus]);
 
     const onZoomReset = useMemoizedFn(() => {
       const rect = containerRef.current?.getBoundingClientRect();
@@ -247,21 +247,11 @@ export const ParticipantTile: (
                 (trackReference.publication?.kind === 'video' ||
                   trackReference.source === Track.Source.Camera ||
                   trackReference.source === Track.Source.ScreenShare) ? (
-                  trackReference.source === Track.Source.ScreenShare ? (
-                    <PinchableBlock getContainer={() => containerRef.current} ref={pinchableRef}>
-                      <VideoTrack
-                        trackRef={trackReference}
-                        onSubscriptionStatusChanged={handleSubscribe}
-                        manageSubscription={autoManageSubscription}
-                      />
-                    </PinchableBlock>
-                  ) : (
-                    <VideoTrack
-                      trackRef={trackReference}
-                      onSubscriptionStatusChanged={handleSubscribe}
-                      manageSubscription={autoManageSubscription}
-                    />
-                  )
+                  <VideoTrack
+                    trackRef={trackReference}
+                    onSubscriptionStatusChanged={handleSubscribe}
+                    manageSubscription={autoManageSubscription}
+                  />
                 ) : (
                   isTrackReference(trackReference) && (
                     <AudioTrack
@@ -303,7 +293,7 @@ export const ParticipantTile: (
             {/* <FocusToggle trackRef={trackReference} /> */}
           </ParticipantContextIfNeeded>
         </TrackRefContextIfNeeded>
-        {shouldShowScaleControl && (
+        {/* {shouldShowScaleControl && (
           <div
             style={{
               position: 'fixed',
@@ -324,7 +314,7 @@ export const ParticipantTile: (
             <ZoomReset style={{ cursor: 'pointer' }} onClick={onZoomReset} />
             <ZoomIn style={{ cursor: 'pointer' }} onClick={() => pinchableRef.current?.zoomIn()} />
           </div>
-        )}
+        )} */}
       </div>
     );
   },
