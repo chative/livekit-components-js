@@ -33,7 +33,7 @@ import { PinchableBlock, PinchableBlockInstance } from '../layout/FocusLayout';
 import { ZoomIn } from './ZoomIn';
 import { ZoomReset } from './ZoomReset';
 import { ZoomOut } from './ZoomOut';
-import { useMemoizedFn } from 'ahooks';
+import { useDebounceFn, useMemoizedFn } from 'ahooks';
 // import { useIsEncrypted } from '../../hooks/useIsEncrypted';
 
 /**
@@ -139,15 +139,27 @@ export const ParticipantTile: (
       }
     }, [trackReference.source]);
 
-    // const shouldShowScaleControl = React.useMemo(() => {
-    //   return trackReference.source === Track.Source.ScreenShare && isFocus;
-    // }, [trackReference.source, isFocus]);
+    const shouldShowScaleControl = React.useMemo(() => {
+      return trackReference.source === Track.Source.ScreenShare && isFocus;
+    }, [trackReference.source, isFocus]);
 
     const onZoomReset = useMemoizedFn(() => {
       const rect = containerRef.current?.getBoundingClientRect();
       pinchableRef.current?.initSize({ height: rect?.height, width: rect?.width });
       pinchableRef.current?.zoomReset();
     });
+
+    const handleResize = useMemoizedFn(() => {
+      const rect = containerRef.current?.getBoundingClientRect();
+      pinchableRef.current?.initSize({ height: rect?.height, width: rect?.width });
+    });
+
+    React.useEffect(() => {
+      window.addEventListener('resize', handleResize);
+      return () => {
+        window.removeEventListener('resize', handleResize);
+      };
+    }, [handleResize]);
 
     const { elementProps } = useParticipantTile<HTMLDivElement>({
       htmlProps,
@@ -247,11 +259,21 @@ export const ParticipantTile: (
                 (trackReference.publication?.kind === 'video' ||
                   trackReference.source === Track.Source.Camera ||
                   trackReference.source === Track.Source.ScreenShare) ? (
-                  <VideoTrack
-                    trackRef={trackReference}
-                    onSubscriptionStatusChanged={handleSubscribe}
-                    manageSubscription={autoManageSubscription}
-                  />
+                  trackReference.source === Track.Source.ScreenShare ? (
+                    <PinchableBlock getContainer={() => containerRef.current} ref={pinchableRef}>
+                      <VideoTrack
+                        trackRef={trackReference}
+                        onSubscriptionStatusChanged={handleSubscribe}
+                        manageSubscription={autoManageSubscription}
+                      />
+                    </PinchableBlock>
+                  ) : (
+                    <VideoTrack
+                      trackRef={trackReference}
+                      onSubscriptionStatusChanged={handleSubscribe}
+                      manageSubscription={autoManageSubscription}
+                    />
+                  )
                 ) : (
                   isTrackReference(trackReference) && (
                     <AudioTrack
@@ -293,7 +315,7 @@ export const ParticipantTile: (
             {/* <FocusToggle trackRef={trackReference} /> */}
           </ParticipantContextIfNeeded>
         </TrackRefContextIfNeeded>
-        {/* {shouldShowScaleControl && (
+        {shouldShowScaleControl && (
           <div
             style={{
               position: 'fixed',
@@ -314,7 +336,7 @@ export const ParticipantTile: (
             <ZoomReset style={{ cursor: 'pointer' }} onClick={onZoomReset} />
             <ZoomIn style={{ cursor: 'pointer' }} onClick={() => pinchableRef.current?.zoomIn()} />
           </div>
-        )} */}
+        )}
       </div>
     );
   },
