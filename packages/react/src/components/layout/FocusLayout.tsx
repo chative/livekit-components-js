@@ -80,7 +80,7 @@ const useGesture = createUseGesture([pinchAction]);
 export const PinchableBlock = React.forwardRef<PinchableBlockInstance, IPinchableBlockProps>(
   (props, ref) => {
     const {
-      minScale = 0.5,
+      minScale = 1,
       maxScale = 100,
       style: styleProps,
       getContainer = () => document.body,
