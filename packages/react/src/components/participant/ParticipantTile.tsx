@@ -155,11 +155,14 @@ export const ParticipantTile: (
     });
 
     React.useEffect(() => {
+      if (!shouldShowScaleControl) {
+        return;
+      }
       window.addEventListener('resize', handleResize);
       return () => {
         window.removeEventListener('resize', handleResize);
       };
-    }, [handleResize]);
+    }, [shouldShowScaleControl]);
 
     const { elementProps } = useParticipantTile<HTMLDivElement>({
       htmlProps,
