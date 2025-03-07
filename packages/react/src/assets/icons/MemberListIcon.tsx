@@ -7,21 +7,14 @@ import type { SVGProps } from 'react';
  * @internal
  */
 const SvgMemberListIcon = (props: SVGProps<SVGSVGElement>) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width={16}
-    height={16}
-    fill="none"
-    stroke="currentColor"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    strokeWidth={2}
-    className="member-list-icon_svg__icon member-list-icon_svg__icon-tabler member-list-icon_svg__icons-tabler-outline member-list-icon_svg__icon-tabler-users"
-    viewBox="0 0 24 24"
-    {...props}
-  >
-    <path stroke="none" d="M0 0h24v24H0z" />
-    <path d="M5 7a4 4 0 1 0 8 0 4 4 0 1 0-8 0M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2M16 3.13a4 4 0 0 1 0 7.75M21 21v-2a4 4 0 0 0-3-3.85" />
+  <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} fill="none" {...props}>
+    <path
+      stroke="#fff"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={1.667}
+      d="M7.777 9.26a2.963 2.963 0 1 0 0-5.927 2.963 2.963 0 0 0 0 5.926M12.964 3.43a2.963 2.963 0 0 1 0 5.74m3.703 7.497v-1.482a2.96 2.96 0 0 0-2.222-2.852M3.334 16.667v-1.482a2.963 2.963 0 0 1 2.963-2.963H9.26a2.963 2.963 0 0 1 2.963 2.963v1.482z"
+    />
   </svg>
 );
 export default SvgMemberListIcon;

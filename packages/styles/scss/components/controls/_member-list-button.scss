@@ -2,4 +2,7 @@
 
 .member-list-button {
   @extend .button;
+  width: 58px;
+  border-radius: 100px;
+  gap: 3px;
 }

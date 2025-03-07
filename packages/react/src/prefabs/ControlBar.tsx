@@ -5,7 +5,11 @@ import { DisconnectButton } from '../components/controls/DisconnectButton';
 import { TrackToggle } from '../components/controls/TrackToggle';
 import { ChatIcon, GearIcon, LeaveIcon, AddMemberIcon, MemberListIcon } from '../assets/icons';
 import { ChatToggle } from '../components/controls/ChatToggle';
-import { useLocalParticipantPermissions, usePersistentUserChoices } from '../hooks';
+import {
+  useLocalParticipantPermissions,
+  useParticipants,
+  usePersistentUserChoices,
+} from '../hooks';
 import { useMediaQuery } from '../hooks/internal';
 import { useMaybeLayoutContext } from '../context';
 import { supportsScreenSharing } from '@cc-livekit/components-core';
@@ -85,6 +89,7 @@ export function ControlBar({
   const visibleControls = { leave: true, ...controls };
 
   const localPermissions = useLocalParticipantPermissions();
+  const participants = useParticipants();
 
   if (!localPermissions) {
     visibleControls.camera = false;
@@ -211,6 +216,7 @@ export function ControlBar({
         <MemberListButton onClick={onMemberList}>
           {showIcon && <MemberListIcon />}
           {showText && 'Member list'}
+          <span style={{ fontSize: 14 }}>{participants.length}</span>
         </MemberListButton>
       )}
       {visibleControls.leave && (
