@@ -1,0 +1,99 @@
+
+
+.participant-aside-list {
+  width: 280px;
+  background-color: #2c3138;
+  height: 100vh;
+  padding: 16px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 10;
+
+  &-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+
+    &-title {
+      font-size: 14px;
+    }
+  }
+
+  &-search {
+    position: relative;
+    margin-bottom: 16px;
+  }
+
+  &-input {
+    width: 100%;
+    padding: 4px 11px;
+    background-color: #2c3139;
+    border-radius: 4px;
+    color: white;
+    outline: none;
+    font-size: 14px;
+    line-height: 1.5;
+    border: 1px solid #474d57;
+    &::placeholder {
+      color: #848e9c;
+    }
+  }
+
+  &-list {
+    flex: 1;
+    overflow-y: auto;
+
+    &-item {
+      display: flex;
+      align-items: center;
+      padding: 8px;
+      border-radius: 4px;
+      margin-bottom: 4px;
+
+      &-avatar {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 12px;
+        color: white;
+
+        &--host {
+          background-color: #fbbf24;
+        }
+
+        &--participant {
+          background-color: #60a5fa;
+        }
+      }
+
+      &-info {
+        flex: 1;
+
+        &-name {
+          font-size: 14px;
+          margin-bottom: 2px;
+        }
+      }
+
+      &-controls {
+        display: flex;
+        gap: 8px;
+
+        button {
+          background-color: transparent;
+          border: none;
+          cursor: pointer;
+          padding: 4px;
+        }
+      }
+    }
+  }
+}

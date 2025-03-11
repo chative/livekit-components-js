@@ -24,6 +24,7 @@ import { Chat } from './Chat';
 import { ControlBar, ControlBarProps } from './ControlBar';
 import { useWarnAboutMissingStyles } from '../hooks/useWarnAboutMissingStyles';
 import { DraggableWrapper } from './DraggableWrapper';
+import { ParticipantAsideList } from '../components/ParticipantAsideList';
 
 /**
  * @public
@@ -143,7 +144,7 @@ export function NewVideoConference({
       if (room.remoteParticipants.size > 1) {
         return;
       }
-      console.warn('on remote connected, current remote size:', room.remoteParticipants.size);
+      console.log('on remote connected, current remote size:', room.remoteParticipants.size);
       layoutContext.pin.dispatch?.({
         msg: 'set_pin',
         trackReference: {
@@ -245,12 +246,12 @@ export function NewVideoConference({
             ) : (
               <div className="lk-focus-layout-wrapper">
                 <FocusLayoutContainer>
+                  {focusTrack && <FocusLayout trackRef={focusTrack} />}
                   <DraggableWrapper>
                     <CarouselLayout tracks={carouselTracks}>
                       <ParticipantTile />
                     </CarouselLayout>
                   </DraggableWrapper>
-                  {focusTrack && <FocusLayout trackRef={focusTrack} />}
                 </FocusLayoutContainer>
               </div>
             )}
@@ -281,6 +282,7 @@ export function NewVideoConference({
       )}
       <RoomAudioRenderer filterLocalTracks={filterLocalTracks} />
       <ConnectionStateToast />
+      {/* <ParticipantAsideList /> */}
     </div>
   );
 }

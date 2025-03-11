@@ -323,7 +323,7 @@ export const ParticipantTile: (
             style={{
               position: 'fixed',
               bottom: 111,
-              left: 'calc(17% + 12px)',
+              left: 12,
               display: 'flex',
               alignItems: 'center',
               gap: 8,
