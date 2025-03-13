@@ -5,9 +5,15 @@ import * as React from 'react';
 export interface FeatureFlags {
   autoSubscription?: boolean;
   nameFormatter?: (participant: Participant) => string;
-  renderParticipantPlaceholder?: (participant: Participant | undefined) => any;
+  renderParticipantPlaceholder?: (
+    participant: Participant | undefined,
+    extraProps: Record<string, any>,
+  ) => any;
   type?: '1on1' | 'instant' | 'group';
   onHangup?: () => void;
+  contactMap?: {
+    [key: string]: any;
+  };
 }
 
 type FeatureContext<T extends boolean = false> = T extends true

@@ -1,4 +1,5 @@
 export { default as AddMemberIcon } from './AddMemberIcon';
+export { default as CallClose } from './CallClose';
 export { default as CameraDisabledIcon } from './CameraDisabledIcon';
 export { default as CameraIcon } from './CameraIcon';
 export { default as ChatCloseIcon } from './ChatCloseIcon';

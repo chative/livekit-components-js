@@ -4,6 +4,7 @@ import { getSourceIcon } from '../../assets/icons/util';
 import { useIsSpeaking, useTrackMutedIndicator } from '../../hooks';
 import type { TrackReferenceOrPlaceholder } from '@cc-livekit/components-core';
 import { MicDisabledMiniIcon, SpeakingDotIcon } from '../../assets/icons';
+import { Track } from 'livekit-client';
 
 /** @public */
 export interface TrackMutedIndicatorProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -49,7 +50,11 @@ export const TrackMutedIndicator: (
     return (
       <div ref={ref} {...htmlProps} data-lk-muted={isMuted} data-lk-speaking={isSpeaking}>
         {/* {props.children ?? getSourceIcon(trackRef.source, !isMuted)} */}
-        <ParticipantStatus isMuted={isMuted} isSpeaking={isSpeaking} />
+        {trackRef.source === Track.Source.Microphone ? (
+          <ParticipantStatus isMuted={isMuted} isSpeaking={isSpeaking} />
+        ) : (
+          getSourceIcon(trackRef.source, !isMuted)
+        )}
       </div>
     );
   },

@@ -1,10 +1,10 @@
 
 
 .participant-aside-list {
-  width: 280px;
+  width: 260px;
   background-color: #2c3138;
   height: 100vh;
-  padding: 16px;
+  padding: 8px;
   color: white;
   display: flex;
   flex-direction: column;
@@ -12,6 +12,7 @@
   right: 0;
   top: 0;
   z-index: 10;
+  -webkit-app-region: no-drag;
 
   &-header {
     display: flex;
@@ -21,6 +22,21 @@
 
     &-title {
       font-size: 14px;
+    }
+  }
+
+  &-close-button {
+    pointer-events: all;
+    padding: 4px;
+    border-radius: 4px;
+    height: 28px;
+    width: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    &:hover {
+      background-color: #3b4149;
     }
   }
 
@@ -51,9 +67,14 @@
     &-item {
       display: flex;
       align-items: center;
-      padding: 8px;
       border-radius: 4px;
-      margin-bottom: 4px;
+      margin: 4px;
+      justify-content: space-between;
+
+      &-info {
+        display: flex;
+        align-items: center;
+      }
 
       &-avatar {
         width: 32px;
@@ -80,19 +101,17 @@
         &-name {
           font-size: 14px;
           margin-bottom: 2px;
+          max-width: 120px;
+          text-overflow: ellipsis;
+          overflow: hidden;
         }
       }
 
-      &-controls {
+      &-status {
         display: flex;
-        gap: 8px;
-
-        button {
-          background-color: transparent;
-          border: none;
-          cursor: pointer;
-          padding: 4px;
-        }
+        flex-flow: row nowrap;
+        gap: 2px;
+        align-items: center;
       }
     }
   }

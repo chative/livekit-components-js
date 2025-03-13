@@ -82,6 +82,8 @@ export function NewVideoConference({
   const room = useRoomContext();
   const lastAutoFocusedScreenShareTrack = React.useRef<TrackReferenceOrPlaceholder | null>(null);
 
+  const [asideListOpen, setAsideListOpen] = React.useState(false);
+
   const tracks = useTracks(
     [
       { source: Track.Source.Camera, withPlaceholder: true },
@@ -258,7 +260,10 @@ export function NewVideoConference({
             <ControlBar
               variation="minimal"
               onAddMember={onAddMember}
-              onMemberList={onMemberList}
+              onMemberList={(...args) => {
+                setAsideListOpen((prev) => !prev);
+                onMemberList?.(...args);
+              }}
               controls={{ chat: true, settings: !!SettingsComponent, ...controls }}
               onScreenShareClick={onScreenShareClick}
               onDeviceError={onDeviceError}
@@ -282,7 +287,7 @@ export function NewVideoConference({
       )}
       <RoomAudioRenderer filterLocalTracks={filterLocalTracks} />
       <ConnectionStateToast />
-      {/* <ParticipantAsideList /> */}
+      <ParticipantAsideList open={asideListOpen} onClose={() => setAsideListOpen(false)} />
     </div>
   );
 }
