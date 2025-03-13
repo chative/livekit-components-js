@@ -10,6 +10,7 @@ import { useTracks } from '../../hooks';
 import { animated } from '@react-spring/web';
 import { createUseGesture, pinchAction } from '@use-gesture/react';
 import { useMemoizedFn } from 'ahooks';
+import { AsideControlOff, AsideControlOn } from '../../assets/icons';
 
 /** @public */
 export interface FocusLayoutContainerProps extends React.HTMLAttributes<HTMLDivElement> {}
@@ -28,12 +29,33 @@ export function FocusLayoutContainer(props: FocusLayoutContainerProps) {
     onlySubscribed: false,
   });
   const isSharingScreen = tracks.some((track) => track.source === Track.Source.ScreenShare);
+  const [showCarouselList, setShowCarouselList] = React.useState(false);
 
   const elementProps = mergeProps(props, {
-    className: `lk-focus-layout ${!isSharingScreen && featureFlags?.type === '1on1' ? 'adapt-1on1-call' : ''}`,
+    className: `lk-focus-layout ${isSharingScreen && !showCarouselList ? 'lk-is-sharing-screen' : ''} ${!isSharingScreen && featureFlags?.type === '1on1' ? 'adapt-1on1-call lk-adapt-1on1-call' : ''}`,
   });
 
-  return <div {...elementProps}>{props.children}</div>;
+  return (
+    <>
+      {isSharingScreen ? (
+        <div
+          className="lk-aside-control"
+          style={{
+            position: 'fixed',
+            top: '50%',
+            right: showCarouselList ? 196 : 0,
+            transform: 'translateY(-50%)',
+            cursor: 'pointer',
+            zIndex: 2,
+          }}
+          onClick={() => setShowCarouselList((prev) => !prev)}
+        >
+          {showCarouselList ? <AsideControlOff /> : <AsideControlOn />}
+        </div>
+      ) : null}
+      <div {...elementProps}>{props.children}</div>
+    </>
+  );
 }
 
 /** @public */

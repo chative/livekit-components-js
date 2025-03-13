@@ -1,4 +1,6 @@
 export { default as AddMemberIcon } from './AddMemberIcon';
+export { default as AsideControlOff } from './AsideControlOff';
+export { default as AsideControlOn } from './AsideControlOn';
 export { default as CallClose } from './CallClose';
 export { default as CameraDisabledIcon } from './CameraDisabledIcon';
 export { default as CameraIcon } from './CameraIcon';

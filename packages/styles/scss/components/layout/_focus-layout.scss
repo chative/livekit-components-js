@@ -1,10 +1,26 @@
 .focus-layout {
   display: grid;
-  grid-template-columns: 1fr 180px;
+  grid-template-columns: 1fr 188px;
   gap: var(--grid-gap);
   width: 100%;
   max-height: 100%;
   padding: var(--grid-gap);
+  .carousel {
+    padding: 4px;
+    border-radius: 8px;
+    background-color: #2c3138;
+  }
+  &.is-sharing-screen {
+    grid-template-columns: 1fr 0;
+    .carousel {
+      padding: 0;
+    }
+  }
+  &.adapt-1on1-call {
+    .carousel {
+      padding: 0;
+    }
+  }
 }
 
 .focused-participant {

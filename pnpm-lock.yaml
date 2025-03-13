@@ -225,6 +225,9 @@ importers:
       antd:
         specifier: 5.21.6
         version: 5.21.6(react-dom@17.0.2(react@17.0.2))(react@17.0.2)
+      atom:
+        specifier: ^1.4.2
+        version: 1.4.2
       clsx:
         specifier: 2.1.1
         version: 2.1.1
@@ -4016,6 +4019,9 @@ packages:
 
   asynckit@0.4.0:
     resolution: {integrity: sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==, tarball: https://registry.npmjs.org/asynckit/-/asynckit-0.4.0.tgz}
+
+  atom@1.4.2:
+    resolution: {integrity: sha512-gcuEz4ob1qvc5LENcJVfWsd5r8xulkvegrepjroB2XD3I9Cy8qb83+4y2+UUDLG6431TDvlbbq33G0/pwrH/AQ==, tarball: https://registry.npmjs.org/atom/-/atom-1.4.2.tgz}
 
   available-typed-arrays@1.0.7:
     resolution: {integrity: sha512-wvUjBtSGN7+7SjNpq/9M2Tg350UZD3q62IFZLbRAR1bSMlCo1ZaeW+BJ+D090e4hIIZLBcTDWe4Mh4jvUDajzQ==, tarball: https://registry.npmjs.org/available-typed-arrays/-/available-typed-arrays-1.0.7.tgz}
@@ -13112,6 +13118,8 @@ snapshots:
   async@3.2.6: {}
 
   asynckit@0.4.0: {}
+
+  atom@1.4.2: {}
 
   available-typed-arrays@1.0.7:
     dependencies:
