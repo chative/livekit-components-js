@@ -12,6 +12,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
+    justify-content: center;
   }
 }
 
@@ -31,6 +32,7 @@
 }
 
 .message-sender-container {
+  position: absolute;
   display: flex;
   align-items: center;
   gap: 2px;
@@ -94,5 +96,24 @@
         }
       }
     }
+  }
+}
+
+@media screen and (max-width: 648px) {
+  .message-sender-container {
+  
+    input {
+      font-size: 13px !important;
+      width: -webkit-fill-available;
+      height: 24px;
+      border: none;
+      outline: none;
+      background-color: transparent;
+      color: white;
+      width: 120px;
+    }
+  }
+  .control-area {
+    padding-left: 80px;
   }
 }
