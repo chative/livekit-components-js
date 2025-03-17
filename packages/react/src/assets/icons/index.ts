@@ -21,6 +21,7 @@ export { default as QualityPoorIcon } from './QualityPoorIcon';
 export { default as QualityUnknownIcon } from './QualityUnknownIcon';
 export { default as ScreenShareIcon } from './ScreenShareIcon';
 export { default as ScreenShareStopIcon } from './ScreenShareStopIcon';
+export { default as SendMessage } from './SendMessage';
 export { default as SpeakingDotIcon } from './SpeakingDotIcon';
 export { default as SpinnerIcon } from './SpinnerIcon';
 export { default as UnfocusToggleIcon } from './UnfocusToggleIcon';

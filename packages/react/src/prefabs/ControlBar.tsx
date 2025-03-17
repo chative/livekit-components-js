@@ -11,13 +11,14 @@ import {
   usePersistentUserChoices,
 } from '../hooks';
 import { useMediaQuery } from '../hooks/internal';
-import { useMaybeLayoutContext } from '../context';
+import { useFeatureContext, useMaybeLayoutContext } from '../context';
 import { supportsScreenSharing } from '@cc-livekit/components-core';
 import { mergeProps } from '../utils';
 import { StartMediaButton } from '../components/controls/StartMediaButton';
 import { SettingsMenuToggle } from '../components/controls/SettingsMenuToggle';
 import { AddMemberButton } from '../components/controls/AddMemberButton';
 import { MemberListButton } from '../components/controls/MemberListButton';
+import { MessageSender } from '../components/MessageSender';
 
 /** @public */
 export type ControlBarControls = {
@@ -144,88 +145,98 @@ export function ControlBar({
     [saveVideoInputEnabled],
   );
 
+  const featureFlags = useFeatureContext();
+  const onSendMessage = featureFlags?.onSendMessage || undefined;
+
   return (
     <div {...htmlProps}>
-      {visibleControls.microphone && (
-        <div className="lk-button-group">
-          <TrackToggle
-            source={Track.Source.Microphone}
-            showIcon={showIcon}
-            onChange={microphoneOnChange}
-            onDeviceError={(error) => onDeviceError?.({ source: Track.Source.Microphone, error })}
-          >
-            {showText && 'Microphone'}
-          </TrackToggle>
-          <div className="lk-button-group-menu">
-            <MediaDeviceMenu
-              kind="audioinput"
-              onActiveDeviceChange={(_kind, deviceId) => saveAudioInputDeviceId(deviceId ?? '')}
-            />
+      {visibleControls.chat ? (
+        <MessageSender onSendMessage={onSendMessage} />
+      ) : (
+        <div className="lk-message-sender-placeholder"></div>
+      )}
+      <div className="lk-control-area">
+        {visibleControls.microphone && (
+          <div className="lk-button-group">
+            <TrackToggle
+              source={Track.Source.Microphone}
+              showIcon={showIcon}
+              onChange={microphoneOnChange}
+              onDeviceError={(error) => onDeviceError?.({ source: Track.Source.Microphone, error })}
+            >
+              {showText && 'Microphone'}
+            </TrackToggle>
+            <div className="lk-button-group-menu">
+              <MediaDeviceMenu
+                kind="audioinput"
+                onActiveDeviceChange={(_kind, deviceId) => saveAudioInputDeviceId(deviceId ?? '')}
+              />
+            </div>
           </div>
-        </div>
-      )}
-      {visibleControls.camera && (
-        <div className="lk-button-group">
-          <TrackToggle
-            source={Track.Source.Camera}
-            showIcon={showIcon}
-            onChange={cameraOnChange}
-            onDeviceError={(error) => onDeviceError?.({ source: Track.Source.Camera, error })}
-          >
-            {showText && 'Camera'}
-          </TrackToggle>
-          <div className="lk-button-group-menu">
-            <MediaDeviceMenu
-              kind="videoinput"
-              onActiveDeviceChange={(_kind, deviceId) => saveVideoInputDeviceId(deviceId ?? '')}
-            />
+        )}
+        {visibleControls.camera && (
+          <div className="lk-button-group">
+            <TrackToggle
+              source={Track.Source.Camera}
+              showIcon={showIcon}
+              onChange={cameraOnChange}
+              onDeviceError={(error) => onDeviceError?.({ source: Track.Source.Camera, error })}
+            >
+              {showText && 'Camera'}
+            </TrackToggle>
+            <div className="lk-button-group-menu">
+              <MediaDeviceMenu
+                kind="videoinput"
+                onActiveDeviceChange={(_kind, deviceId) => saveVideoInputDeviceId(deviceId ?? '')}
+              />
+            </div>
           </div>
-        </div>
-      )}
-      {visibleControls.screenShare && browserSupportsScreenSharing && (
-        <TrackToggle
-          source={Track.Source.ScreenShare}
-          captureOptions={{ audio: true, selfBrowserSurface: 'include' }}
-          showIcon={showIcon}
-          onChange={onScreenShareChange}
-          onClick={onScreenShareClick}
-          onDeviceError={(error) => onDeviceError?.({ source: Track.Source.ScreenShare, error })}
-        >
-          {showText && (isScreenShareEnabled ? 'Stop screen share' : 'Share screen')}
-        </TrackToggle>
-      )}
-      {visibleControls.chat && (
+        )}
+        {visibleControls.screenShare && browserSupportsScreenSharing && (
+          <TrackToggle
+            source={Track.Source.ScreenShare}
+            captureOptions={{ audio: true, selfBrowserSurface: 'include' }}
+            showIcon={showIcon}
+            onChange={onScreenShareChange}
+            onClick={onScreenShareClick}
+            onDeviceError={(error) => onDeviceError?.({ source: Track.Source.ScreenShare, error })}
+          >
+            {showText && (isScreenShareEnabled ? 'Stop screen share' : 'Share screen')}
+          </TrackToggle>
+        )}
+        {/* {visibleControls.chat && (
         <ChatToggle>
           {showIcon && <ChatIcon />}
           {showText && 'Chat'}
         </ChatToggle>
-      )}
-      {visibleControls.settings && (
-        <SettingsMenuToggle>
-          {showIcon && <GearIcon />}
-          {showText && 'Settings'}
-        </SettingsMenuToggle>
-      )}
-      {visibleControls.addMember && (
-        <AddMemberButton onClick={onAddMember}>
-          {showIcon && <AddMemberIcon />}
-          {showText && 'Add member'}
-        </AddMemberButton>
-      )}
-      {visibleControls.memberList && (
-        <MemberListButton onClick={onMemberList}>
-          {showIcon && <MemberListIcon />}
-          {showText && 'Member list'}
-          <span style={{ fontSize: 14 }}>{participants.length}</span>
-        </MemberListButton>
-      )}
-      {visibleControls.leave && (
-        <DisconnectButton>
-          {showIcon && <LeaveIcon />}
-          {showText && 'Leave'}
-        </DisconnectButton>
-      )}
-      <StartMediaButton />
+      )} */}
+        {visibleControls.settings && (
+          <SettingsMenuToggle>
+            {showIcon && <GearIcon />}
+            {showText && 'Settings'}
+          </SettingsMenuToggle>
+        )}
+        {visibleControls.addMember && (
+          <AddMemberButton onClick={onAddMember}>
+            {showIcon && <AddMemberIcon />}
+            {showText && 'Add member'}
+          </AddMemberButton>
+        )}
+        {visibleControls.memberList && (
+          <MemberListButton onClick={onMemberList}>
+            {showIcon && <MemberListIcon />}
+            {showText && 'Member list'}
+            <span style={{ fontSize: 14 }}>{participants.length}</span>
+          </MemberListButton>
+        )}
+        {visibleControls.leave && (
+          <DisconnectButton>
+            {showIcon && <LeaveIcon />}
+            {showText && 'Leave'}
+          </DisconnectButton>
+        )}
+        <StartMediaButton />
+      </div>
     </div>
   );
 }

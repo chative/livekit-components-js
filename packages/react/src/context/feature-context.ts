@@ -14,6 +14,7 @@ export interface FeatureFlags {
   contactMap?: {
     [key: string]: any;
   };
+  onSendMessage?: (message: string) => void;
 }
 
 type FeatureContext<T extends boolean = false> = T extends true
