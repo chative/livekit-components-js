@@ -3,13 +3,18 @@ import { mergeProps } from '../../utils';
 import { getSourceIcon } from '../../assets/icons/util';
 import { useIsSpeaking, useTrackMutedIndicator } from '../../hooks';
 import type { TrackReferenceOrPlaceholder } from '@cc-livekit/components-core';
-import { MicDisabledMiniIcon, SpeakingDotIcon } from '../../assets/icons';
+import {
+  MicDisabledMiniIcon,
+  MicDisabledSingleColorIcon,
+  SpeakingDotIcon,
+} from '../../assets/icons';
 import { Track } from 'livekit-client';
 
 /** @public */
 export interface TrackMutedIndicatorProps extends React.HTMLAttributes<HTMLDivElement> {
   trackRef: TrackReferenceOrPlaceholder;
   show?: 'always' | 'muted' | 'unmuted';
+  singleColor?: boolean;
 }
 
 /**
@@ -26,7 +31,7 @@ export const TrackMutedIndicator: (
   props: TrackMutedIndicatorProps & React.RefAttributes<HTMLDivElement>,
 ) => any = /* @__PURE__ */ React.forwardRef<HTMLDivElement, TrackMutedIndicatorProps>(
   function TrackMutedIndicator(
-    { trackRef, show = 'always', ...props }: TrackMutedIndicatorProps,
+    { trackRef, show = 'always', singleColor, ...props }: TrackMutedIndicatorProps,
     ref,
   ) {
     const { className, isMuted } = useTrackMutedIndicator(trackRef);
@@ -51,9 +56,9 @@ export const TrackMutedIndicator: (
       <div ref={ref} {...htmlProps} data-lk-muted={isMuted} data-lk-speaking={isSpeaking}>
         {/* {props.children ?? getSourceIcon(trackRef.source, !isMuted)} */}
         {trackRef.source === Track.Source.Microphone ? (
-          <ParticipantStatus isMuted={isMuted} isSpeaking={isSpeaking} />
+          <ParticipantStatus isMuted={isMuted} isSpeaking={isSpeaking} singleColor={singleColor} />
         ) : (
-          getSourceIcon(trackRef.source, !isMuted)
+          getSourceIcon(trackRef.source, !isMuted, singleColor)
         )}
       </div>
     );
@@ -63,13 +68,14 @@ export const TrackMutedIndicator: (
 interface IParticipantStatusProps {
   isMuted: boolean;
   isSpeaking: boolean;
+  singleColor?: boolean;
 }
 
 function ParticipantStatus(props: IParticipantStatusProps) {
-  const { isSpeaking, isMuted } = props;
+  const { isSpeaking, isMuted, singleColor } = props;
 
   if (isMuted) {
-    return <MicDisabledMiniIcon />;
+    return singleColor ? <MicDisabledSingleColorIcon /> : <MicDisabledMiniIcon />;
   }
   if (isSpeaking) {
     return (

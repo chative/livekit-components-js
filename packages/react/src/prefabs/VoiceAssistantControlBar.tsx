@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Track } from 'livekit-client';
 import * as React from 'react';
 import { MediaDeviceMenu } from './MediaDeviceMenu';

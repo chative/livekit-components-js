@@ -1,4 +1,5 @@
 .button {
+  --control-bg: var(--dst-color-background-secondary);
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -15,6 +16,7 @@
   height: 44px;
 
   &:not(:disabled):hover {
+    --control-hover-bg: var(--dst-color-background-third);
     background-color: var(--control-hover-bg);
   }
 
@@ -23,10 +25,10 @@
   }
 
   &[aria-pressed='true'] {
-    background-color: var(--control-active-bg);
+    background-color: var(--dst-color-background-secondary);
 
     &:hover {
-      background-color: var(--control-active-hover-bg);
+      background-color: var(--dst-color-background-third);
     }
   }
 

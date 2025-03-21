@@ -8,6 +8,7 @@ module.exports = {
     }),
     require('postcss-variables-prefixer')({
       prefix: `${PREFIX}-`,
+      ignore: [/--dst/],
     }),
     require('./postcss-plugins/data-attribute-prefixer')({ prefix: `${PREFIX}-` }),
   ],

@@ -70,6 +70,7 @@ export const ParticipantAsideList = (props: IProps) => {
                     source: Track.Source.Microphone,
                   }}
                   show={'always'}
+                  singleColor={true}
                 ></TrackMutedIndicator>
               </div>
               <div className="lk-participant-aside-list-list-item-status-video">
@@ -79,6 +80,7 @@ export const ParticipantAsideList = (props: IProps) => {
                     source: Track.Source.Camera,
                   }}
                   show={'always'}
+                  singleColor={true}
                 ></TrackMutedIndicator>
               </div>
             </div>

@@ -14,6 +14,7 @@
       width: 100%;
       justify-content: start;
       padding-block: 0.5rem;
+      background-color: transparent;
     }
 
     &:not([data-active='true']) > .button:not(:disabled):hover {
@@ -31,7 +32,7 @@
   [data-active='true'] {
     > .button {
       color: var(--accent-fg);
-      background-color: var(--accent-bg);
+      background-color: var(--dst-color-background-four);
     }
   }
 }

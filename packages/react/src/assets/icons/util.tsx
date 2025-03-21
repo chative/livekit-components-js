@@ -12,17 +12,34 @@ import {
   QualityPoorIcon,
   ScreenShareIcon,
   ScreenShareStopIcon,
+  CameraSingleColorIcon,
+  CameraDisabledSingleColorIcon,
 } from './index';
 
 /**
  * @internal
  */
-export function getSourceIcon(source: Track.Source, enabled: boolean) {
+export function getSourceIcon(
+  source: Track.Source,
+  enabled: boolean,
+  singleColor: boolean = false,
+) {
+  console.log(singleColor);
   switch (source) {
     case Track.Source.Microphone:
       return enabled ? <MicIcon /> : <MicDisabledIcon />;
     case Track.Source.Camera:
-      return enabled ? <CameraIcon /> : <CameraDisabledIcon />;
+      return enabled ? (
+        singleColor ? (
+          <CameraSingleColorIcon />
+        ) : (
+          <CameraIcon />
+        )
+      ) : singleColor ? (
+        <CameraDisabledSingleColorIcon />
+      ) : (
+        <CameraDisabledIcon />
+      );
     case Track.Source.ScreenShare:
       return enabled ? <ScreenShareStopIcon /> : <ScreenShareIcon />;
     default:

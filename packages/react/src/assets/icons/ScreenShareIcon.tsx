@@ -7,18 +7,13 @@ import type { SVGProps } from 'react';
  * @internal
  */
 const SvgScreenShareIcon = (props: SVGProps<SVGSVGElement>) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={20} height={16} fill="none" {...props}>
+  <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} fill="none" {...props}>
     <path
-      fill="currentColor"
-      fillRule="evenodd"
-      d="M0 2.75A2.75 2.75 0 0 1 2.75 0h14.5A2.75 2.75 0 0 1 20 2.75v10.5A2.75 2.75 0 0 1 17.25 16H2.75A2.75 2.75 0 0 1 0 13.25zM2.75 1.5c-.69 0-1.25.56-1.25 1.25v10.5c0 .69.56 1.25 1.25 1.25h14.5c.69 0 1.25-.56 1.25-1.25V2.75c0-.69-.56-1.25-1.25-1.25z"
-      clipRule="evenodd"
-    />
-    <path
-      fill="currentColor"
-      fillRule="evenodd"
-      d="M9.47 4.22a.75.75 0 0 1 1.06 0l2.25 2.25a.75.75 0 0 1-1.06 1.06l-.97-.97v4.69a.75.75 0 0 1-1.5 0V6.56l-.97.97a.75.75 0 0 1-1.06-1.06z"
-      clipRule="evenodd"
+      stroke="#fff"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={1.667}
+      d="M15.833 4.167H4.167c-.92 0-1.667.746-1.667 1.666v8.334c0 .92.746 1.666 1.667 1.666h11.666c.92 0 1.667-.746 1.667-1.666V5.833c0-.92-.746-1.666-1.667-1.666M12.5 10 10 7.5m0 0L7.5 10zm0 0v5z"
     />
   </svg>
 );

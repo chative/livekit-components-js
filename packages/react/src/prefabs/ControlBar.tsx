@@ -150,11 +150,7 @@ export function ControlBar({
 
   return (
     <div {...htmlProps}>
-      {visibleControls.chat ? (
-        <MessageSender onSendMessage={onSendMessage} />
-      ) : (
-        <div className="lk-message-sender-placeholder"></div>
-      )}
+      {visibleControls.chat && <MessageSender onSendMessage={onSendMessage} />}
       <div className="lk-control-area">
         {visibleControls.microphone && (
           <div className="lk-button-group">
