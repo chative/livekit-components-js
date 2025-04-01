@@ -55,6 +55,15 @@ export function useMediaDeviceSelect({
     [kind, requestPermissions, onError],
   );
   const devices = useObservableState(deviceObserver, [] as MediaDeviceInfo[]);
+
+  const filteredDevices = React.useMemo(() => {
+    const defaultDevice = devices.find((d) => d.deviceId === 'default');
+    if (!defaultDevice) {
+      return devices;
+    }
+    return [defaultDevice, ...devices.filter((d) => !defaultDevice.label.includes(d.label))];
+  }, [devices]);
+
   // Active device management.
   const [currentDeviceId, setCurrentDeviceId] = React.useState<string>(
     roomFallback?.getActiveDevice(kind) ?? 'default',
@@ -77,5 +86,10 @@ export function useMediaDeviceSelect({
     };
   }, [activeDeviceObservable]);
 
-  return { devices, className, activeDeviceId: currentDeviceId, setActiveMediaDevice };
+  return {
+    devices: filteredDevices,
+    className,
+    activeDeviceId: currentDeviceId,
+    setActiveMediaDevice,
+  };
 }
