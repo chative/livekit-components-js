@@ -99,9 +99,9 @@ export function useTracks<T extends SourcesArray = Track.Source[]>(
             ) {
               return;
             }
-            log.debug(
-              `Add ${placeholderSource} placeholder for participant ${participant.identity}.`,
-            );
+            // log.debug(
+            //   `Add ${placeholderSource} placeholder for participant ${participant.identity}.`,
+            // );
             const placeholder: TrackReferencePlaceholder = {
               participant,
               source: placeholderSource,
