@@ -26,7 +26,7 @@ export function LayoutContextProvider({
   }, [layoutContextValue.pin.state, onPinChange]);
 
   React.useEffect(() => {
-    log.debug('Widget Updated', { widgetState: layoutContextValue.widget.state });
+    // log.debug('Widget Updated', { widgetState: layoutContextValue.widget.state });
     if (onWidgetChange && layoutContextValue.widget.state) {
       onWidgetChange(layoutContextValue.widget.state);
     }
