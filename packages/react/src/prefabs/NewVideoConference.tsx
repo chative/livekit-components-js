@@ -93,7 +93,7 @@ export function NewVideoConference({
   );
 
   const widgetUpdate = (state: WidgetState) => {
-    log.debug('updating widget state', state);
+    // log.debug('updating widget state', state);
     setWidgetState(state);
   };
 
