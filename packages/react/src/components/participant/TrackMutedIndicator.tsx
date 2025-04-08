@@ -32,7 +32,7 @@ export const TrackMutedIndicator: (
   props: TrackMutedIndicatorProps & React.RefAttributes<HTMLDivElement>,
 ) => any = /* @__PURE__ */ React.forwardRef<HTMLDivElement, TrackMutedIndicatorProps>(
   function TrackMutedIndicator(
-    { trackRef, show = 'always', singleColor, ...props }: TrackMutedIndicatorProps,
+    { trackRef, show = 'always', singleColor, onShowChange, ...props }: TrackMutedIndicatorProps,
     ref,
   ) {
     const { className, isMuted } = useTrackMutedIndicator(trackRef);
@@ -50,7 +50,7 @@ export const TrackMutedIndicator: (
     );
 
     React.useEffect(() => {
-      props.onShowChange?.(showIndicator);
+      onShowChange?.(showIndicator);
     }, [showIndicator]);
 
     if (!showIndicator) {
