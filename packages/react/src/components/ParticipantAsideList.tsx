@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { useParticipants, useSortedParticipants } from '../hooks';
+import { useParticipants, useSortedParticipants, useTracks } from '../hooks';
 import { useFeatureContext } from '../context';
-import { Participant, Track } from 'livekit-client';
+import { Participant, RoomEvent, Track } from 'livekit-client';
 import { TrackMutedIndicator } from './participant/TrackMutedIndicator';
 import { CallClose } from '../assets/icons';
 
@@ -24,6 +24,11 @@ export const ParticipantAsideList = (props: IProps) => {
       (nameFormatter?.(p) ?? p.identity).toLowerCase().includes(searchQuery.toLowerCase()),
     );
   }, [participants, searchQuery]);
+
+  const [screenShareTrack] = useTracks(
+    [{ source: Track.Source.ScreenShare, withPlaceholder: false }],
+    { updateOnlyOn: [RoomEvent.ActiveSpeakersChanged], onlySubscribed: false },
+  );
 
   if (!open) {
     return null;
@@ -58,7 +63,14 @@ export const ParticipantAsideList = (props: IProps) => {
                 {renderParticipantPlaceholder?.(participant, { size: 28 })}
               </div>
               <div className="lk-participant-aside-list-list-item-info-name">
-                {nameFormatter ? nameFormatter(participant) : participant.identity}
+                <span className="lk-participant-aside-list-list-item-info-name-text">
+                  {nameFormatter ? nameFormatter(participant) : participant.identity}
+                </span>
+                <span className="lk-participant-aside-list-list-item-sharing">
+                  {screenShareTrack?.participant?.identity === participant.identity
+                    ? 'Sharing'
+                    : ''}
+                </span>
               </div>
             </div>
 

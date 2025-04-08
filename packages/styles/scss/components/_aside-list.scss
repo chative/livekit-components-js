@@ -68,7 +68,7 @@
       display: flex;
       align-items: center;
       border-radius: 4px;
-      margin: 4px 0;
+      margin-bottom: 12px;
       justify-content: space-between;
 
       &-info {
@@ -83,7 +83,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-right: 12px;
+        margin-right: 8px;
         color: white;
 
         &--host {
@@ -99,21 +99,39 @@
         flex: 1;
 
         &-name {
-          font-size: 14px;
-          margin-bottom: 2px;
-          max-width: 120px;
-          text-overflow: ellipsis;
-          overflow: hidden;
-          word-break: break-all;
-          white-space: pre;
+          display: flex;
+          flex-flow: column nowrap;
+          align-items: flex-start;
+          justify-content: center;
+          &-text {
+            font-size: 14px;
+            max-width: 120px;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            word-break: break-all;
+            white-space: pre;
+          }
         }
       }
 
       &-status {
         display: flex;
         flex-flow: row nowrap;
-        gap: 2px;
+        gap: 12px;
         align-items: center;
+
+        .track-muted-indicator-microphone, .track-muted-indicator-camera{
+          margin-inline-end: 0;
+        }
+      }
+
+      &-sharing {
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 100%;
+        letter-spacing: 0%;
+        vertical-align: middle;
+        color: #B7BDC6;
       }
     }
   }
