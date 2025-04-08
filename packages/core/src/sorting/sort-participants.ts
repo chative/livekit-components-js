@@ -1,7 +1,6 @@
 import type { Participant } from 'livekit-client';
 import { LocalParticipant } from 'livekit-client';
 import {
-  sortParticipantsByAudioLevel,
   sortParticipantsByIsSpeaking,
   sortParticipantsByJoinedAt,
   sortParticipantsByLastSpokenAT,
@@ -19,8 +18,18 @@ export function sortParticipants(participants: Participant[]): Participant[] {
   const sortedParticipants = [...participants];
   sortedParticipants.sort((a, b) => {
     // loudest speaker first
-    if (a.isSpeaking && b.isSpeaking) {
-      return sortParticipantsByAudioLevel(a, b);
+    // if (a.isSpeaking && b.isSpeaking) {
+    //   return sortParticipantsByAudioLevel(a, b);
+    // }
+
+    const aScreenShareTrack = a.isScreenShareEnabled;
+    const bScreenSHareTrack = b.isScreenShareEnabled;
+    if (aScreenShareTrack !== bScreenSHareTrack) {
+      if (aScreenShareTrack) {
+        return -1;
+      } else {
+        return 1;
+      }
     }
 
     // speaker goes first
