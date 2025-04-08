@@ -35,8 +35,8 @@ export const ParticipantAsideList = (props: IProps) => {
         <span className="lk-participant-aside-list-header-title">
           Attendees({participants.length})
         </span>
-        <div className="lk-participant-aside-list-close-button">
-          <CallClose onClick={onClose} />
+        <div className="lk-participant-aside-list-close-button" onClick={onClose}>
+          <CallClose />
         </div>
       </div>
 
