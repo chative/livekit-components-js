@@ -68,6 +68,7 @@ export function FocusLayoutContainer(props: FocusLayoutContainerProps) {
                 left: 12,
                 top: 40,
                 borderRadius: 4,
+                visibility: showParticipantName ? 'visible' : 'hidden',
               }}
             >
               {/* {isEncrypted && <LockLockedIcon style={{ marginRight: '0.25rem' }} />} */}
