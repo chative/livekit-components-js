@@ -5,12 +5,15 @@ import { ParticipantTile } from '../participant/ParticipantTile';
 import type { ParticipantClickEvent } from '@cc-livekit/components-core';
 import { useFeatureContext } from '../../context';
 import { RoomEvent, Track } from 'livekit-client';
-import { useTracks } from '../../hooks';
+import { useSpeakingParticipants, useTracks } from '../../hooks';
 
 import { animated } from '@react-spring/web';
 import { createUseGesture, pinchAction } from '@use-gesture/react';
 import { useMemoizedFn } from 'ahooks';
 import { AsideControlOff, AsideControlOn } from '../../assets/icons';
+import { createPortal } from 'react-dom';
+import { TrackMutedIndicator } from '../participant/TrackMutedIndicator';
+import { ParticipantName } from '../participant/ParticipantName';
 
 /** @public */
 export interface FocusLayoutContainerProps extends React.HTMLAttributes<HTMLDivElement> {}
@@ -30,6 +33,8 @@ export function FocusLayoutContainer(props: FocusLayoutContainerProps) {
   });
   const isSharingScreen = tracks.some((track) => track.source === Track.Source.ScreenShare);
   const [showCarouselList, setShowCarouselList] = React.useState(false);
+  const [currentSpeaker] = useSpeakingParticipants() ?? [];
+  const [showParticipantName, setShowParticipantName] = React.useState(false);
 
   const elementProps = mergeProps(props, {
     className: `lk-focus-layout ${isSharingScreen && !showCarouselList ? 'lk-is-sharing-screen' : ''} ${!isSharingScreen && featureFlags?.type === '1on1' ? 'adapt-1on1-call lk-adapt-1on1-call' : ''}`,
@@ -54,6 +59,33 @@ export function FocusLayoutContainer(props: FocusLayoutContainerProps) {
         </div>
       ) : null}
       <div {...elementProps}>{props.children}</div>
+      {isSharingScreen && currentSpeaker
+        ? createPortal(
+            <div
+              className="lk-participant-metadata-item"
+              style={{
+                position: 'fixed',
+                left: 12,
+                top: 40,
+                borderRadius: 4,
+              }}
+            >
+              {/* {isEncrypted && <LockLockedIcon style={{ marginRight: '0.25rem' }} />} */}
+              <TrackMutedIndicator
+                trackRef={{
+                  participant: currentSpeaker,
+                  source: Track.Source.Microphone,
+                }}
+                show={'unmuted'}
+                onShowChange={setShowParticipantName}
+              ></TrackMutedIndicator>
+              {showParticipantName && (
+                <ParticipantName participant={currentSpeaker}></ParticipantName>
+              )}
+            </div>,
+            document.body,
+          )
+        : null}
     </>
   );
 }

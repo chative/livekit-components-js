@@ -15,6 +15,7 @@ export interface TrackMutedIndicatorProps extends React.HTMLAttributes<HTMLDivEl
   trackRef: TrackReferenceOrPlaceholder;
   show?: 'always' | 'muted' | 'unmuted';
   singleColor?: boolean;
+  onShowChange?: (show: boolean) => void;
 }
 
 /**
@@ -47,6 +48,10 @@ export const TrackMutedIndicator: (
         }),
       [className, props],
     );
+
+    React.useEffect(() => {
+      props.onShowChange?.(showIndicator);
+    }, [showIndicator]);
 
     if (!showIndicator) {
       return null;
